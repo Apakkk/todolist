@@ -1,0 +1,29 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace TodoApi.DTOs;
+
+public class CreateTodoDto
+{
+    [Required]
+    [MaxLength(1000)]
+    public string Text { get; set; } = string.Empty;
+}
+
+public class UpdateTodoDto
+{
+    [Required]
+    [MaxLength(1000)]
+    public string Text { get; set; } = string.Empty;
+
+    public bool Completed { get; set; }
+}
+
+public class TodoDto
+{
+    public int Id { get; set; }
+    public string Text { get; set; } = string.Empty;
+    public bool Completed { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
+    public int UserId { get; set; }
+}
