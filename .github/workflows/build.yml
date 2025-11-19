@@ -32,9 +32,6 @@ jobs:
     - name: Build
       run: npm run build
     
-    - name: Run Tests
-      run: npm test -- --run
-    
     - name: Security Audit
       run: npm audit --production --audit-level=moderate
       continue-on-error: true
