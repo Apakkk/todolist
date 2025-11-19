@@ -314,11 +314,12 @@ Bu proje, modern DevOps prensipleriyle **sıfırdan production-ready** hale geti
 | **1. Development** | ✅ | Full-stack uygulama geliştirildi |
 | **2. Build Automation** | ✅ | Otomatik derleme ve test scriptleri |
 | **3. Static Analysis** | ✅ | Kod kalitesi ve güvenlik taraması |
-| **4. Artifact Creation** | ✅ | Dağıtılabilir paketler oluşturuldu |
-| **5. Containerization** | ✅ | Docker image'ları optimize edildi |
-| **6. Orchestration** | ✅ | Multi-container yönetimi |
-| **7. Deployment** | ✅ | Tek komutla deployment |
-| **8. Documentation** | ✅ | Kapsamlı dokümantasyon |
+| **4. Test** | ✅ | Unit testler (infrastructure ready) |
+| **5. Artifact Creation** | ✅ | Dağıtılabilir paketler oluşturuldu |
+| **6. Containerization** | ✅ | Docker image'ları optimize edildi |
+| **7. Orchestration** | ✅ | Multi-container yönetimi |
+| **8. Deployment** | ✅ | Tek komutla deployment |
+| **9. Documentation** | ✅ | Kapsamlı dokümantasyon |
 
 ### 🔄 Pipeline Akışı
 
@@ -332,23 +333,27 @@ Bu proje, modern DevOps prensipleriyle **sıfırdan production-ready** hale geti
 └──────┬──────┘  • Type check / Compile
        │         • ESLint / dotnet format
 ┌──────▼──────┐
-│ 3. ANALYZE  │  • npm audit (security)
+│  3. TEST    │  • npm test / dotnet test
+└──────┬──────┘  • Unit + Integration tests
+       │
+┌──────▼──────┐
+│ 4. ANALYZE  │  • npm audit (security)
 └──────┬──────┘  • dotnet list package --vulnerable
        │
 ┌──────▼──────┐
-│ 4. PACKAGE  │  • tar.gz artifacts
+│ 5. PACKAGE  │  • tar.gz artifacts
 └──────┬──────┘  • Version tagging
        │         • Checksums
 ┌──────▼──────┐
-│5.CONTAINERIZE│ • Docker multi-stage builds
+│6.CONTAINERIZE│ • Docker multi-stage builds
 └──────┬──────┘  • Image optimization (81MB frontend, 381MB backend)
        │
 ┌──────▼──────┐
-│  6. DEPLOY  │  • docker-compose up
+│  7. DEPLOY  │  • docker-compose up
 └──────┬──────┘  • Health checks
        │         • Service orchestration
 ┌──────▼──────┐
-│   7. RUN    │  ✅ Production ready!
+│   8. RUN    │  ✅ Production ready!
 └─────────────┘
 ```
 
