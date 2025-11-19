@@ -738,9 +738,22 @@ Tüm dokümantasyon `docs/` klasöründe (~2,500+ satır):
 | **[PACKAGING.md](docs/PACKAGING.md)** | Docker & artifact creation | DevOps |
 | **[DEVOPS-LIFECYCLE.md](docs/DEVOPS-LIFECYCLE.md)** | Complete journey (969 satır) | Tech Leads |
 | **[DEVOPS-SUMMARY.md](docs/DEVOPS-SUMMARY.md)** | Görsel özet & metrikler | Managers |
+| **[SONARQUBE-SETUP.md](docs/SONARQUBE-SETUP.md)** | Code quality analysis setup | DevOps (Optional) |
 | **[CHANGELOG.md](docs/CHANGELOG.md)** | Version history | All |
 
 **📖 [docs/README.md](docs/README.md)** - Dokümantasyon indeksi ve rehber
+
+---
+
+## 🔍 Code Quality Analysis (Optional)
+
+SonarQube integration is configured but **disabled by default**. To enable:
+
+1. Set up SonarCloud or self-hosted SonarQube
+2. Configure GitHub secrets: `SONAR_TOKEN` and `SONAR_HOST_URL`
+3. See [docs/SONARQUBE-SETUP.md](docs/SONARQUBE-SETUP.md) for detailed instructions
+
+Current status: ⚠️ **Skipped** (no secrets configured)
 
 ---
 

@@ -13,9 +13,10 @@ Bu klasör, TodoList projesinin detaylı dokümantasyonunu içerir.
 | **[DEVOPS-LIFECYCLE.md](DEVOPS-LIFECYCLE.md)** | Complete DevOps journey | 969 satır | Tech Leads |
 | **[SCRIPTS-GUIDE.md](SCRIPTS-GUIDE.md)** | Script karşılaştırması | 361 satır | All Users |
 | **[DEVOPS-SUMMARY.md](DEVOPS-SUMMARY.md)** | Görsel özet & metrikler | 402 satır | Stakeholders |
+| **[SONARQUBE-SETUP.md](SONARQUBE-SETUP.md)** | Code quality setup (optional) | ~400 satır | DevOps Engineers |
 | **[CHANGELOG.md](CHANGELOG.md)** | Version history | 197 satır | Project Managers |
 
-**Toplam:** ~2,500+ satır detaylı dokümantasyon
+**Toplam:** ~3,000+ satır detaylı dokümantasyon
 
 ---
 
