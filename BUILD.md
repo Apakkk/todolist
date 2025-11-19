@@ -97,6 +97,7 @@ sonar-scanner
 ### CI/CD Entegrasyonu
 - GitHub Actions workflow: `.github/workflows/build.yml`
 - Her push ve PR'da otomatik analiz
+- Actions versiyonları: v4 (en güncel)
 
 ---
 
