@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 📝 TodoList Uygulaması
 
 Modern bir full-stack todo list uygulaması. React + TypeScript frontend ve C# .NET backend ile geliştirilmiştir.
@@ -103,6 +102,15 @@ dotnet run
 # Backend API: http://localhost:5275
 # Swagger Docs: http://localhost:5275/swagger
 ```
+
+### Monitoring (Prometheus & Grafana)
+
+Docker ile tüm stack çalışırken:
+
+- **Prometheus**: `http://localhost:9090`
+- **Grafana**: `http://localhost:3000`
+- **Backend Metrics**: `http://localhost:5275/metrics`
+
 
 ## 🧪 Testler
 
@@ -769,4 +777,3 @@ For support, email support@example.com or open an issue on GitHub.
 ---
 
 **Made with ❤️ using React, .NET, and Docker**
->>>>>>> 6063863268c5e53059fc7c9409eb879bcdd77f2d
