@@ -21,3 +21,18 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Test Coverage
+coverage/
+*.coverage
+TestResults/
+
+# Backend compiled files
+backend/bin/
+backend/obj/
+backend.tests/bin/
+backend.tests/obj/
+
+# Environment-specific config (use .example files instead)
+backend/appsettings.Development.json
+
