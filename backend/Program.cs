@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TodoApi.Data;
 using TodoApi.Services;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,11 +60,17 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowAll");
+
+// Prometheus metrics
+app.UseHttpMetrics();
 app.UseAuthentication();
 app.UseAuthorization();
 
 // Health check endpoint
 app.MapHealthChecks("/api/health");
+
+// Prometheus metrics endpoint
+app.MapMetrics("/metrics");
 
 app.MapControllers();
 
