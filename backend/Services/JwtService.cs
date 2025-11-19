@@ -25,7 +25,7 @@ public class JwtService : IJwtService
     {
         var secretKey = _configuration["JWT:Secret"] ?? throw new ArgumentNullException("JWT Secret is null");
         var key = Encoding.UTF8.GetBytes(secretKey);
-        
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[]
@@ -50,7 +50,7 @@ public class JwtService : IJwtService
         {
             var secretKey = _configuration["JWT:Secret"] ?? throw new ArgumentNullException("JWT Secret is null");
             var key = Encoding.UTF8.GetBytes(secretKey);
-            
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var validationParameters = new TokenValidationParameters
             {

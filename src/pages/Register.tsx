@@ -30,8 +30,11 @@ export default function Register() {
       const response = await authService.register(formData);
       authService.storeAuthData(response);
       navigate('/dashboard');
-    } catch (error: any) {
-      setError(error.response?.data || 'Kayıt olurken hata oluştu');
+    } catch (error: unknown) {
+      const errorMessage = error && typeof error === 'object' && 'response' in error 
+        ? (error.response as { data?: string })?.data || 'Kayıt olurken hata oluştu'
+        : 'Kayıt olurken hata oluştu';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
