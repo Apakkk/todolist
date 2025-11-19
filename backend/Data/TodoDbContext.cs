@@ -33,7 +33,7 @@ public class TodoDbContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Text).IsRequired().HasMaxLength(1000);
             entity.Property(e => e.Completed).HasDefaultValue(false);
-            
+
             // Relationship configuration
             entity.HasOne(e => e.User)
                   .WithMany(e => e.Todos)

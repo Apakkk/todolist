@@ -34,7 +34,7 @@ public class TodosController : ControllerBase
     public async Task<ActionResult<List<TodoDto>>> GetTodos()
     {
         var userId = GetCurrentUserId();
-        
+
         var todos = await _context.TodoItems
             .Where(t => t.UserId == userId)
             .OrderByDescending(t => t.CreatedAt)

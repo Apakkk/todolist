@@ -28,8 +28,11 @@ export default function Login() {
       const response = await authService.login(formData);
       authService.storeAuthData(response);
       navigate('/dashboard');
-    } catch (error: any) {
-      setError(error.response?.data || 'Giriş yapılırken hata oluştu');
+    } catch (error: unknown) {
+      const errorMessage = error && typeof error === 'object' && 'response' in error 
+        ? (error.response as { data?: string })?.data || 'Giriş yapılırken hata oluştu'
+        : 'Giriş yapılırken hata oluştu';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
