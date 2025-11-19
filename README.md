@@ -466,6 +466,25 @@ npm run test
 dotnet test
 ```
 
+---
+
+## 📚 Detaylı Dokümantasyon
+
+Tüm dokümantasyon `docs/` klasöründe (~2,500+ satır):
+
+| Dosya | İçerik | Hedef |
+|-------|--------|-------|
+| **[BUILD.md](docs/BUILD.md)** | Build pipeline, static analysis | Developers |
+| **[SCRIPTS-GUIDE.md](docs/SCRIPTS-GUIDE.md)** ⭐ | 7 script karşılaştırması | **Herkese Önerilir** |
+| **[PACKAGING.md](docs/PACKAGING.md)** | Docker & artifact creation | DevOps |
+| **[DEVOPS-LIFECYCLE.md](docs/DEVOPS-LIFECYCLE.md)** | Complete journey (969 satır) | Tech Leads |
+| **[DEVOPS-SUMMARY.md](docs/DEVOPS-SUMMARY.md)** | Görsel özet & metrikler | Managers |
+| **[CHANGELOG.md](docs/CHANGELOG.md)** | Version history | All |
+
+**📖 [docs/README.md](docs/README.md)** - Dokümantasyon indeksi ve rehber
+
+---
+
 ## 🤝 Contributing
 
 1. Fork the project
