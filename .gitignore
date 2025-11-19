@@ -36,3 +36,4 @@ backend.tests/obj/
 # Environment-specific config (use .example files instead)
 backend/appsettings.Development.json
 
+artifacts/*.tar.gz

@@ -25,9 +25,35 @@ echo ""
 mkdir -p $ARTIFACT_DIR/{frontend,backend}
 
 # ============================================
-# 1. FRONTEND ARTIFACT
+# 1. TESTS
 # ============================================
-echo -e "${BLUE}[1/4] Building Frontend Artifact...${NC}"
+echo -e "${BLUE}[1/5] Running Tests...${NC}"
+
+# Frontend tests
+echo -e "${YELLOW}Running frontend tests...${NC}"
+npm test -- --run
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ Frontend tests failed!${NC}"
+    exit 1
+fi
+echo -e "${GREEN}✅ Frontend tests passed${NC}"
+
+# Backend tests
+echo -e "${YELLOW}Running backend tests...${NC}"
+cd backend
+dotnet test ../backend.tests/TodoApi.Tests.csproj --configuration Release --verbosity quiet
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ Backend tests failed!${NC}"
+    exit 1
+fi
+cd ..
+echo -e "${GREEN}✅ Backend tests passed${NC}"
+
+# ============================================
+# 2. FRONTEND ARTIFACT
+# ============================================
+echo ""
+echo -e "${BLUE}[2/5] Building Frontend Artifact...${NC}"
 
 # Build frontend
 npm run build
@@ -43,10 +69,10 @@ echo -e "${GREEN}✅ Frontend artifact: $FRONTEND_ARTIFACT${NC}"
 echo -e "   Size: $(du -h $FRONTEND_ARTIFACT | cut -f1)"
 
 # ============================================
-# 2. BACKEND ARTIFACT
+# 3. BACKEND ARTIFACT
 # ============================================
 echo ""
-echo -e "${BLUE}[2/4] Building Backend Artifact...${NC}"
+echo -e "${BLUE}[3/5] Building Backend Artifact...${NC}"
 
 # Publish backend
 cd backend
@@ -64,10 +90,10 @@ echo -e "${GREEN}✅ Backend artifact: $BACKEND_ARTIFACT${NC}"
 echo -e "   Size: $(du -h $BACKEND_ARTIFACT | cut -f1)"
 
 # ============================================
-# 3. DOCKER IMAGES
+# 4. DOCKER IMAGES
 # ============================================
 echo ""
-echo -e "${BLUE}[3/4] Building Docker Images...${NC}"
+echo -e "${BLUE}[4/5] Building Docker Images...${NC}"
 
 # Backend Docker image
 echo "Building backend image..."
@@ -88,10 +114,10 @@ fi
 echo -e "${GREEN}✅ Frontend image: todoapp-frontend:$VERSION${NC}"
 
 # ============================================
-# 4. VERSION TAGGING & MANIFEST
+# 5. VERSION TAGGING & MANIFEST
 # ============================================
 echo ""
-echo -e "${BLUE}[4/4] Creating Build Manifest...${NC}"
+echo -e "${BLUE}[5/5] Creating Build Manifest...${NC}"
 
 # Build manifest oluştur
 cat > $ARTIFACT_DIR/build-manifest.json << EOF
