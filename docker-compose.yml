@@ -68,6 +68,32 @@ services:
       retries: 3
     restart: unless-stopped
 
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: todoapp-prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    networks:
+      - todoapp-network
+    depends_on:
+      - backend
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: todoapp-grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - todoapp-network
+    depends_on:
+      - prometheus
+
 networks:
   todoapp-network:
     driver: bridge
