@@ -5,6 +5,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-11-21
+
+### ✨ New Features
+
+#### API Enhancements
+- **Pagination Support**: Added pagination to todos endpoint
+  - `PaginationDto`: Request parameters (pageNumber, pageSize)
+  - `PaginatedResponseDto`: Response with metadata (totalCount, totalPages, hasNext, hasPrevious)
+  - Default page size: 10, Max: 100
+  - Query example: `/api/todos?pageNumber=1&pageSize=20`
+
+### 🐛 Bug Fixes
+
+#### Authentication
+- **JWT Token Expiry**: Made token expiry configurable (v1.0.1 hotfix)
+  - Changed from hardcoded 7 days to configurable hours
+  - Default: 24 hours
+  - Configuration: `JWT:ExpiryHours` in appsettings.json
+  - Prevents frequent re-login issues
+
+### 📚 Documentation
+
+#### Git Workflow
+- **Branching Strategy**: Comprehensive Git Flow documentation
+  - Git Flow vs GitHub Flow comparison
+  - Branch types and naming conventions
+  - Workflow examples (feature, hotfix, release)
+  - Commit message standards
+  - Branch protection rules
+  - Best practices and anti-patterns
+
+### 🔧 Internal Changes
+- Implemented Git Flow branching model
+- Added branch protection guidelines
+- Improved configuration management
+
 ## [1.0.0] - 2025-11-19
 
 ### 🎉 Initial Release
