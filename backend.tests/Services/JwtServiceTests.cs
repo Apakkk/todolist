@@ -19,6 +19,13 @@ public class JwtServiceTests
             .Setup(x => x["JWT:Secret"])
             .Returns("YourSuperSecretKeyThatIsAtLeast32CharactersLongForTestingPurposes!@#$%");
         
+        // Mock ExpiryHours configuration section
+        var expiryHoursSection = new Mock<IConfigurationSection>();
+        expiryHoursSection.Setup(x => x.Value).Returns("24");
+        _configurationMock
+            .Setup(x => x.GetSection("JWT:ExpiryHours"))
+            .Returns(expiryHoursSection.Object);
+        
         _jwtService = new JwtService(_configurationMock.Object);
     }
 
