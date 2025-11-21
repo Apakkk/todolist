@@ -757,6 +757,101 @@ Current status: ⚠️ **Skipped** (no secrets configured)
 
 ---
 
+## 🌳 Git Branching Strategy
+
+This project follows **Git Flow** branching model for organized development and releases.
+
+### Branch Structure
+
+```mermaid
+gitGraph
+    commit id: "Initial"
+    branch develop
+    checkout develop
+    commit id: "Setup"
+    
+    branch feature/pagination
+    checkout feature/pagination
+    commit id: "Add pagination"
+    checkout develop
+    merge feature/pagination
+    
+    branch release/v1.1.0
+    checkout release/v1.1.0
+    commit id: "Bump version"
+    checkout main
+    merge release/v1.1.0 tag: "v1.1.0"
+    
+    checkout main
+    branch hotfix/auth-fix
+    commit id: "Fix auth bug"
+    checkout main
+    merge hotfix/auth-fix tag: "v1.0.1"
+    checkout develop
+    merge hotfix/auth-fix
+```
+
+### Branch Types
+
+| Branch | Purpose | Base | Merge To | Lifetime |
+|--------|---------|------|----------|----------|
+| `main` | Production-ready code | - | - | Permanent |
+| `develop` | Integration branch | `main` | `main` | Permanent |
+| `feature/*` | New features | `develop` | `develop` | Temporary |
+| `release/*` | Release preparation | `develop` | `main` + `develop` | Temporary |
+| `hotfix/*` | Critical bug fixes | `main` | `main` + `develop` | Temporary |
+
+### Workflow Examples
+
+**Feature Development:**
+```bash
+git checkout develop
+git checkout -b feature/add-search
+# ... make changes ...
+git commit -m "feat(api): add search functionality"
+git push origin feature/add-search
+# Create Pull Request: develop <- feature/add-search
+```
+
+**Hotfix (Emergency):**
+```bash
+git checkout main
+git checkout -b hotfix/critical-bug
+# ... fix bug ...
+git commit -m "fix: resolve critical security issue"
+git checkout main
+git merge hotfix/critical-bug
+git tag v1.0.1
+git checkout develop
+git merge hotfix/critical-bug
+```
+
+**Release:**
+```bash
+git checkout develop
+git checkout -b release/v1.1.0
+# ... bump version, update changelog ...
+git commit -m "chore(release): bump version to 1.1.0"
+git checkout main
+git merge release/v1.1.0
+git tag v1.1.0
+git checkout develop
+git merge release/v1.1.0
+```
+
+### Commit Message Convention
+
+```
+<type>(<scope>): <subject>
+
+Types: feat, fix, docs, style, refactor, test, chore
+Example: feat(api): add pagination support
+```
+
+📖 **Full Documentation**: [docs/BRANCHING_STRATEGY.md](docs/BRANCHING_STRATEGY.md)
+
+---
+
 ## 🤝 Contributing
 
 1. Fork the project
@@ -767,8 +862,17 @@ Current status: ⚠️ **Skipped** (no secrets configured)
 
 ## 📝 Version History
 
+- **1.1.0** (21 Nov 2025)
+  - ✨ Pagination support for todos endpoint
+  - 🐛 JWT token expiry configuration (v1.0.1 hotfix)
+  - 📚 Git branching strategy documentation
+  - 🔧 Implemented Git Flow model
+
+- **1.0.1** (21 Nov 2025) - Hotfix
+  - 🐛 Fixed JWT token expiry (configurable hours)
+
 - **1.0.0** (19 Nov 2025)
-  - Initial release
+  - 🎉 Initial release
   - Full-stack implementation
   - Docker containerization
   - Build pipeline automation
