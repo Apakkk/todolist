@@ -31,13 +31,21 @@ public class TodosController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<TodoDto>>> GetTodos()
+    public async Task<ActionResult<PaginatedResponseDto<TodoDto>>> GetTodos([FromQuery] PaginationDto pagination)
     {
         var userId = GetCurrentUserId();
 
+        // Get total count
+        var totalCount = await _context.TodoItems
+            .Where(t => t.UserId == userId)
+            .CountAsync();
+
+        // Get paginated todos
         var todos = await _context.TodoItems
             .Where(t => t.UserId == userId)
             .OrderByDescending(t => t.CreatedAt)
+            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+            .Take(pagination.PageSize)
             .Select(t => new TodoDto
             {
                 Id = t.Id,
@@ -49,7 +57,16 @@ public class TodosController : ControllerBase
             })
             .ToListAsync();
 
-        return Ok(todos);
+        var response = new PaginatedResponseDto<TodoDto>
+        {
+            Items = todos,
+            PageNumber = pagination.PageNumber,
+            PageSize = pagination.PageSize,
+            TotalCount = totalCount,
+            TotalPages = (int)Math.Ceiling(totalCount / (double)pagination.PageSize)
+        };
+
+        return Ok(response);
     }
 
     [HttpPost]
