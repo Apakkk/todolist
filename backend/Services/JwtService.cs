@@ -26,6 +26,9 @@ public class JwtService : IJwtService
         var secretKey = _configuration["JWT:Secret"] ?? throw new ArgumentNullException("JWT Secret is null");
         var key = Encoding.UTF8.GetBytes(secretKey);
 
+        // Get token expiry from configuration (default: 24 hours)
+        var expiryHours = _configuration.GetValue<int>("JWT:ExpiryHours", 24);
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[]
@@ -35,7 +38,7 @@ public class JwtService : IJwtService
                 new Claim(ClaimTypes.GivenName, user.FirstName),
                 new Claim(ClaimTypes.Surname, user.LastName)
             }),
-            Expires = DateTime.UtcNow.AddDays(7),
+            Expires = DateTime.UtcNow.AddHours(expiryHours),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
 
